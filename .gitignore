@@ -1,0 +1,7 @@
+*.sqlite3
+.idea
+*.log
+*.pot
+*.pyc
+local_settings.py
+

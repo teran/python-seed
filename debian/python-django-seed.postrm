@@ -1,0 +1,10 @@
+#!/bin/bash
+
+if [[ -x "/etc/init.d/uwsgi" ]]; then
+    invoke-rc.d uwsgi restart
+fi
+
+if [[ -x "/etc/init.d/nginx" ]]; then
+    invoke-rc.d nginx restart
+fi
+

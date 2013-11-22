@@ -1,0 +1,10 @@
+#!/bin/bash
+
+useradd --system --create-home --shell /bin/nologin --home-dir /var/lib/seed seed
+
+ln -s /etc/uwsgi/apps-available/seed.yaml   /etc/uwsgi/apps-enabled/seed.yaml
+ln -s /etc/nginx/sites-available/seed.conf  /etc/nginx/sites-enabled/seed.conf
+
+invoke-rc.d uwsgi restart
+invoke-rc.d nginx restart
+
