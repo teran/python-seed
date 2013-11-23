@@ -13,6 +13,9 @@ export WEBAPP_DESTDIR="`pwd`/debian/python-django-seed"
 export CLIENT_DESTDIR="`pwd`/debian/python-seed-client"
 export CLEANER_DRSTDIR="`pwd`/debian/python-seed-cleaner"
 
+install:
+	$(MAKE) -C src -f Makefile install
+
 %:
 	dh $@
 
