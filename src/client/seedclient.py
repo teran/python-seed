@@ -84,6 +84,7 @@ class SeedClient:
                 self.logger.info('Torrent %s, name %s status changed to %s' % (t.id, t.name, t.status))
                 files = t.files()
                 for f in files:
+                    self.logger.info('Downloaded file: %s/%s' % (t.downloadDir, files[f]['name']))
                     print '%s/%s' % (t.downloadDir, files[f]['name'])
                 exit(0)
 
