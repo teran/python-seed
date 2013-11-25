@@ -64,8 +64,9 @@ class SeedClient:
             if t.status not in ['seeding', 'complete']:
                 sleep(3)
             else:
-                for f in t.files():
-                    print '%s/%s' % (t.downloadDir, f.name)
+                files = t.files()
+                for f in files:
+                    print '%s/%s' % (t.downloadDir, files[f]['name'])
                 exit(0)
 
     def upload(self):
