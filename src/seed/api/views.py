@@ -8,13 +8,11 @@ from django.http import HttpResponse, HttpResponseBadRequest, \
 from django.views.decorators.csrf import csrf_exempt
 import transmissionrpc
 
-
 tc = transmissionrpc.Client(
     settings.TRANSMISSION['default']['HOST'],
     port=settings.TRANSMISSION['default']['PORT'],
     user=settings.TRANSMISSION['default']['USER'],
     password=settings.TRANSMISSION['default']['PASSWORD'])
-
 
 @csrf_exempt
 def create(request):
@@ -55,6 +53,11 @@ def create(request):
                 }, indent=4, sort_keys=False),
                 content_type='application/json'
             )
+
+        try:
+            os.unlink('/tmp/' + filename + '.torrent')
+        except:
+            pass
 
         p = subprocess.Popen(
             "/usr/bin/mktorrent --announce='%s' '%s/%s' --output='%s'" % (
