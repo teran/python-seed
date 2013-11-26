@@ -68,8 +68,12 @@ class SeedClient:
             torrent = tc.add_torrent(self.options.magnet)
             self.logger.debug('Torrent %s added' % torrent.id)
         except:
-            self.logger.error('Torrent adding error')
-            raise
+            try:
+                for t in tc.get_torrents():
+                    if t.magnetLink == self.options.magnet:
+                        torrent = tc.get_torrent(t.id)
+            except:
+                raise
 
         while True:
             t = tc.get_torrent(
@@ -81,7 +85,6 @@ class SeedClient:
             if t.status not in ['seeding', 'complete']:
                 sleep(3)
             else:
-                self.logger.info('Torrent %s, name %s status changed to %s' % (t.id, t.name, t.status))
                 files = t.files()
                 for f in files:
                     self.logger.info('Downloaded file: %s/%s' % (t.downloadDir, files[f]['name']))
@@ -97,10 +100,10 @@ class SeedClient:
             files={'file': open(self.options.file, 'rb')})
         try:
             print json.loads(response.content)['magnet']
+            exit(0)
         except:
             self.logger.error('Unexpected response: %s' % response.content)
             raise
-        exit(0)
 
 
 if __name__ == "__main__":
