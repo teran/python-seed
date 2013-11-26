@@ -90,7 +90,7 @@ class SeedClient:
 
     def upload(self):
         url = 'http://%s:%s/api/create' % (
-            self.options.seed_host, self.options.seed_port),
+            self.options.seed_host, self.options.seed_port)
         self.logger.debug('Sending POST request to %s' % url)
         response = requests.post(
             url,
