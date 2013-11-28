@@ -108,7 +108,6 @@ class SeedClient:
             files={'file': open(self.options.file, 'rb')})
         try:
             print json.loads(response.content)['magnet']
-            exit(0)
         except:
             self.logger.error('Unexpected response: %s' % response.content)
             raise
