@@ -30,6 +30,11 @@ class SeedClient:
         )
 
         self.parser.add_option(
+            '-o', '--output-dir', dest='output_dir',
+            help='Output directory for downloaded torrent'
+        )
+
+        self.parser.add_option(
             '-v', '--verbose', action='store_true', dest='verbose',
             help='print verbose information during work'
         )
@@ -65,8 +70,11 @@ class SeedClient:
             self.logger.debug('Connected to Transmission RPC')
 
         try:
-            torrent = tc.add_torrent(self.options.magnet)
-            self.logger.debug('Torrent %s added' % torrent.id)
+            download_dir = self.options.output_dir or '/tmp/'
+            torrent = tc.add_torrent(
+                torrent=self.options.magnet,
+                download_dir=download_dir)
+            self.logger.debug('Torrent %s added, downloading to %s' % (torrent.id, download_dir))
         except:
             try:
                 for t in tc.get_torrents():
