@@ -21,10 +21,15 @@ def create(request):
             file = request.FILES.get('file')
             filename = os.path.basename(file.name)
 
-            fp = open('%s/%s' % (settings.VAULT_PATH, file.name), 'w')
+            tmpfile = '%s/%s' % (settings.VAULT_PATH, file.name)
+            fp = open(tmpfile, 'w')
             for chunk in file.chunks():
                 fp.write(chunk)
             fp.close()
+            try:
+                os.unlink(tmpfile)
+            except:
+                pass
         elif 'url' in request.POST:
             url = request.POST['url']
             filename = os.path.basename(request.POST['url'])

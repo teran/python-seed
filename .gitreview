@@ -1,4 +1,4 @@
 [gerrit]
 host=gerrit.mirantis.com
 port=29418
-project=openstack-ci/qa/python-seed
+project=fuel-qa-team/python-seed
