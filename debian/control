@@ -16,7 +16,7 @@ Package: python-seed-client
 Section: extra
 Priority: optional
 Architecture: all
-Depends: python-transmissionrpc (>= 0.11), transmission-daemon, python-requests
+Depends: python-transmissionrpc (>= 0.11), transmission-daemon, mktorrent
 Description: Client for python-django-seed
  .
 
